@@ -56,4 +56,8 @@ public class EconomyStatistics extends JavaPlugin {
 		}
 		logger.info(logprefix + "Plugin Enabled!");
 	}
+
+	public void onDisable(){
+
+	}
 }
