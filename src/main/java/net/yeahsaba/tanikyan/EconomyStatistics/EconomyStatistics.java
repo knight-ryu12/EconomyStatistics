@@ -31,6 +31,8 @@ public class EconomyStatistics extends JavaPlugin {
 		saveDefaultConfig();
 		plugin = this;
 		boolean enable_cc = false;
+		logger.info(logprefix + "Enabling Plugin...");
+		logger.info(logprefix + "EconomyStatistics Version: " + this.getDescription().getVersion());
 		if(manager.isPluginEnabled("ChestShop")) enable_cc = true; else logger.warning(logprefix + "ChestShop not Found! Disabling Plugin...");
 		if(!enable_cc) manager.disablePlugin(plugin);
 		logger.info(logprefix + "Found ChestShop!");
