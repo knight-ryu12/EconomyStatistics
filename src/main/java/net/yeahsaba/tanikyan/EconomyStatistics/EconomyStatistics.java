@@ -33,13 +33,13 @@ public class EconomyStatistics extends JavaPlugin {
 		boolean enable_cc = false;
 		if(manager.isPluginEnabled("ChestShop")) enable_cc = true; else logger.warning(logprefix + "ChestShop not Found! Disabling Plugin...");
 		if(!enable_cc) manager.disablePlugin(plugin);
+		logger.info(logprefix + "Found ChestShop!");
+		logger.info("Version: " + manager.getPlugin("ChestShop").getDescription().getVersion());
 		if(manager.isPluginEnabled("Vault")) enable_vault = true; else logger.warning(logprefix + "Vault not Found! Disabling Plugin...");
 		if(!enable_vault) manager.disablePlugin(plugin);
 		if(manager.isPluginEnabled("iConomy")) enable_iconomy = true;
 		if(manager.isPluginEnabled("CraftConomy")) enable_craftconomy = true;
 		if(manager.isPluginEnabled("PlayerPoints")) enable_playerpoints = true;
-		logger.info(logprefix + "Found ChestShop!");
-		logger.info("Version: " + manager.getPlugin("ChestShop").getDescription().getVersion());
 		logger.info(logprefix + "Found Vault!");
 		logger.info("Version: " + manager.getPlugin("Vault").getDescription().getVersion());
 		if(enable_iconomy){
@@ -58,6 +58,7 @@ public class EconomyStatistics extends JavaPlugin {
 	}
 
 	public void onDisable(){
-
+		//ステータスファイル等を保存する
+		logger.info(logprefix + "Disabling Plugin...");
 	}
 }
