@@ -11,14 +11,14 @@ public class StatusUpdater extends JavaPlugin {
 	}
 
 	public static void AutomaticUpdate(Plugin plugin, int i){
-        new BukkitRunnable() {
+		new BukkitRunnable(){
 			@Override
-            public void run() {
+			public void run() {
 				long start = 0,end = 0;
 				start = System.currentTimeMillis();
 
 				end = System.currentTimeMillis();
 			}
-        }.runTaskTimer(plugin,  i * 20, i * 20);
+		}.runTaskTimer(plugin,  i * 20, i * 20);
 	}
 }
