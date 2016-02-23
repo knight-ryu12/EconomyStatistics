@@ -3,7 +3,8 @@ Settings:
   Database:
     MySQL:
       use: false
-      host: localhost
-      port: 3306
-      user: root
-      pass: password
+      Host: localhost
+      Port: 3306
+      Database: database
+      User: root
+      Pass: password

@@ -65,7 +65,13 @@ public class EconomyStatistics extends JavaPlugin {
 		}
 		//MySQL 接続
 		use_mysql = conf.getBoolean("Settings.Database.MySQL.use");
-		if(use_mysql) MySQL.connect(mysql_url, mysql_database, mysql_user, mysql_pass);
+		if(use_mysql){
+			mysql_url = conf.getString("Settings.Database.MySQL.Host") + ":" + conf.getInt("Settings.Database.MySQL.Port");
+			mysql_database = conf.getString("Settings.Database.MySQL.Database");
+			mysql_user = conf.getString("Settings.Database.MySQL.User");
+			mysql_pass = conf.getString("Settings.Database.MySQL.Pass");
+			if(mysql_url != null && mysql_database != null && mysql_user != null && mysql_pass != null) MySQL.connect(mysql_url, mysql_database, mysql_user, mysql_pass); else logger.warning(logprefix + "Invalid MySQL Settings!");
+		}
 		logger.info(logprefix + "Plugin Enabled!");
 	}
 
