@@ -3,6 +3,8 @@ package net.yeahsaba.tanikyan.EconomyStatistics;
 import java.io.File;
 import java.util.logging.Logger;
 
+import net.yeahsaba.tanikyan.EconomyStatistics.Database.MySQL;
+
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -20,6 +22,9 @@ public class EconomyStatistics extends JavaPlugin {
 	public static PluginManager manager = Bukkit.getServer().getPluginManager();
 	public static Logger logger = Bukkit.getServer().getLogger();
 
+	public static String mysql_url, mysql_database, mysql_user, mysql_pass;
+	public static boolean use_mysql = false;
+
 	public static boolean enable_vault = false;
 	public static boolean enable_iconomy = false;
 	public static boolean enable_craftconomy = false;
@@ -28,7 +33,9 @@ public class EconomyStatistics extends JavaPlugin {
 	public static String logprefix = "[ES] ";
 
 	public void onEnable(){
+		//ファイル関連の処理
 		saveDefaultConfig();
+		//saveStatusFile
 		plugin = this;
 		boolean enable_cc = false;
 		logger.info(logprefix + "Enabling Plugin...");
@@ -56,11 +63,16 @@ public class EconomyStatistics extends JavaPlugin {
 			logger.info(logprefix + "Found PlayerPoints!");
 			logger.info(logprefix + "Version: " + manager.getPlugin("PlayerPoints").getDescription().getVersion());
 		}
+		//MySQL 接続
+		if(use_mysql) MySQL.connect(mysql_url, mysql_database, mysql_user, mysql_pass);
 		logger.info(logprefix + "Plugin Enabled!");
 	}
 
 	public void onDisable(){
-		//ステータスファイル等を保存する
+		//ファイル関連の処理
+		//SaveStatusFile
+		//MySQL クローズ
+		if(use_mysql) MySQL.close();;
 		logger.info(logprefix + "Disabling Plugin...");
 	}
 }
