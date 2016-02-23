@@ -64,6 +64,7 @@ public class EconomyStatistics extends JavaPlugin {
 			logger.info(logprefix + "Version: " + manager.getPlugin("PlayerPoints").getDescription().getVersion());
 		}
 		//MySQL 接続
+		use_mysql = conf.getBoolean("Settings.Database.MySQL.use");
 		if(use_mysql) MySQL.connect(mysql_url, mysql_database, mysql_user, mysql_pass);
 		logger.info(logprefix + "Plugin Enabled!");
 	}
@@ -72,7 +73,7 @@ public class EconomyStatistics extends JavaPlugin {
 		//ファイル関連の処理
 		//SaveStatusFile
 		//MySQL クローズ
-		if(use_mysql) MySQL.close();;
+		if(use_mysql) MySQL.close();
 		logger.info(logprefix + "Disabling Plugin...");
 	}
 }
