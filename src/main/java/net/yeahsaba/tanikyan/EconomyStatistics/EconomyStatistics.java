@@ -13,8 +13,21 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class EconomyStatistics extends JavaPlugin {
+	//config
 	public static File config = new File("plugins/EconomyStatistics", "config.yml");
 	public static FileConfiguration conf = YamlConfiguration.loadConfiguration(config);
+	//ステータス関連設定ファイル
+	public static File statussettingfile = new File("plugins/EconomyStatistics", "status.yml");
+	public static FileConfiguration ssf = YamlConfiguration.loadConfiguration(statussettingfile);
+	//ステータス保存用ファイル
+	public static File statusfile_iconomy;
+	public static FileConfiguration sf_iconomy;
+	public static File statusfile_craftconomy;
+	public static FileConfiguration sf_craftconomy;
+	public static File statusfile_playerpoints;
+	public static FileConfiguration sf_playerpoints;
+	public static File statusfile;
+	public static FileConfiguration sf;
 
 	public static EconomyStatistics EconomyStatistics;
 	public static Plugin plugin;

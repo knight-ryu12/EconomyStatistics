@@ -1,0 +1,6 @@
+Settings:
+  Update:
+    Interval: 600
+    TargetList:
+    - DIAMOND
+
