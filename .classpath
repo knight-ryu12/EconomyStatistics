@@ -32,5 +32,9 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Tanikyan/Desktop/ゲーム/Minecraft/note backup/05 Plugins/00 参照ライブラリ/ES/ChestShop.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tanikyan/Desktop/ゲーム/Minecraft/note backup/05 Plugins/00 参照ライブラリ/ES/craftconomy3-3.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tanikyan/Desktop/ゲーム/Minecraft/note backup/05 Plugins/00 参照ライブラリ/ES/iConomy.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tanikyan/Desktop/ゲーム/Minecraft/note backup/05 Plugins/00 参照ライブラリ/ES/PlayerPoints.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -7,7 +7,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import net.yeahsaba.tanikyan.EconomyStatistics.EconomyStatistics;
+import net.yeahsaba.tanikyan.EconomyStatistics.Event.UpdateEconomyStatusEvent;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -39,7 +41,7 @@ public class StatusUpdater extends JavaPlugin {
 		new BukkitRunnable(){
 			@Override
 			public void run() {
-				List<String> targetlist = EconomyStatistics.ssf.getStringList("");
+				List<String> targetlist = EconomyStatistics.ssf.getStringList("Settings.Update.TargetList");
 				if(targetplugin.contains("iConomy")){
 					for(String material : targetlist){
 						int amount = EconomyStatistics.sf_iconomy.getInt("Status." + material + ".amount");
@@ -76,7 +78,10 @@ public class StatusUpdater extends JavaPlugin {
 				}else {
 					EconomyStatistics.logger.warning("[ES-File] 連携プラグイン名が不正です！");
 					EconomyStatistics.logger.warning("[ES-File] データ更新に失敗しました (" + targetplugin + ")");
+					return;
 				}
+				UpdateEconomyStatusEvent event = new UpdateEconomyStatusEvent();
+				Bukkit.getServer().getPluginManager().callEvent(event);
 			}
 		}.runTaskAsynchronously(plugin);
 	}
@@ -97,7 +102,7 @@ public class StatusUpdater extends JavaPlugin {
 		new BukkitRunnable(){
 			@Override
 			public void run() {
-				List<String> materiallist = EconomyStatistics.ssf.getStringList("");
+				List<String> materiallist = EconomyStatistics.ssf.getStringList("Settings.Update.TargetList");
 				for(String material:materiallist){
 					filec.set("Status." + material + ".amount", 0);
 					filec.set("Status." + material + ".money", 0);

@@ -4,6 +4,11 @@ import java.io.File;
 import java.util.logging.Logger;
 
 import net.yeahsaba.tanikyan.EconomyStatistics.Database.MySQL;
+import net.yeahsaba.tanikyan.EconomyStatistics.Listener.ChestShopEventListener;
+import net.yeahsaba.tanikyan.EconomyStatistics.Listener.CraftConomyEventListener;
+import net.yeahsaba.tanikyan.EconomyStatistics.Listener.EventListener;
+import net.yeahsaba.tanikyan.EconomyStatistics.Listener.IconomyEventLisneter;
+import net.yeahsaba.tanikyan.EconomyStatistics.Listener.PlayerPointsEventListener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -60,21 +65,24 @@ public class EconomyStatistics extends JavaPlugin {
 		if(manager.isPluginEnabled("Vault")) enable_vault = true; else logger.warning(logprefix + "Vault not Found! Disabling Plugin...");
 		if(!enable_vault) manager.disablePlugin(plugin);
 		if(manager.isPluginEnabled("iConomy")) enable_iconomy = true;
-		if(manager.isPluginEnabled("CraftConomy")) enable_craftconomy = true;
+		if(manager.isPluginEnabled("Craftconomy3")) enable_craftconomy = true;
 		if(manager.isPluginEnabled("PlayerPoints")) enable_playerpoints = true;
 		logger.info(logprefix + "Found Vault!");
 		logger.info("Version: " + manager.getPlugin("Vault").getDescription().getVersion());
 		if(enable_iconomy){
 			logger.info(logprefix + "Found iConomy!");
 			logger.info(logprefix + "Version: " + manager.getPlugin("iConomy").getDescription().getVersion());
+			new IconomyEventLisneter(this);
 		}
 		if(enable_craftconomy){
 			logger.info(logprefix + "Found CraftConomy!");
 			logger.info(logprefix + "Version: " + manager.getPlugin("CraftConomy").getDescription().getVersion());
+			new CraftConomyEventListener(this);
 		}
 		if(enable_playerpoints){
 			logger.info(logprefix + "Found PlayerPoints!");
 			logger.info(logprefix + "Version: " + manager.getPlugin("PlayerPoints").getDescription().getVersion());
+			new PlayerPointsEventListener(this);
 		}
 		//MySQL 接続
 		use_mysql = conf.getBoolean("Settings.Database.MySQL.use");
@@ -85,6 +93,8 @@ public class EconomyStatistics extends JavaPlugin {
 			mysql_pass = conf.getString("Settings.Database.MySQL.Pass");
 			if(mysql_url != null && mysql_database != null && mysql_user != null && mysql_pass != null) MySQL.connect(mysql_url, mysql_database, mysql_user, mysql_pass); else logger.warning(logprefix + "Invalid MySQL Settings!");
 		}
+		new EventListener(this);
+		new ChestShopEventListener(this);
 		logger.info(logprefix + "Plugin Enabled!");
 	}
 
