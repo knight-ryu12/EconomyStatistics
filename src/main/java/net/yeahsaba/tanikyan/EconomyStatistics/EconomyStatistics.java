@@ -11,6 +11,7 @@ import net.yeahsaba.tanikyan.EconomyStatistics.Listener.IconomyEventLisneter;
 import net.yeahsaba.tanikyan.EconomyStatistics.Listener.PlayerPointsEventListener;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -49,6 +50,7 @@ public class EconomyStatistics extends JavaPlugin {
 	public static boolean enable_playerpoints = false;
 
 	public static String logprefix = "[ES] ";
+	public static String mprefix;
 
 	public void onEnable(){
 		//ファイル関連の処理
@@ -81,8 +83,13 @@ public class EconomyStatistics extends JavaPlugin {
 		}
 		if(enable_playerpoints){
 			logger.info(logprefix + "Found PlayerPoints!");
-			logger.info(logprefix + "Version: " + manager.getPlugin("PlayerPoints").getDescription().getVersion());
-			new PlayerPointsEventListener(this);
+			if(PlayerPointsEventListener.hookPlayerPoints()){
+				logger.info(logprefix + "Hook into PlayerPoints!");
+				logger.info(logprefix + "Version: " + manager.getPlugin("PlayerPoints").getDescription().getVersion());
+				new PlayerPointsEventListener(this);
+			}else {
+				enable_playerpoints = false;
+			}
 		}
 		//MySQL 接続
 		use_mysql = conf.getBoolean("Settings.Database.MySQL.use");
@@ -95,6 +102,7 @@ public class EconomyStatistics extends JavaPlugin {
 		}
 		new EventListener(this);
 		new ChestShopEventListener(this);
+		mprefix = ChatColor.translateAlternateColorCodes('&', conf.getString("Settings.Messages.prefix"));
 		logger.info(logprefix + "Plugin Enabled!");
 	}
 

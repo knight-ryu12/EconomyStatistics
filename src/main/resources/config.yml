@@ -1,5 +1,14 @@
 ## EconomyStatistics Config ##
 Settings:
+  Messages:
+    prefix: "&2[ES] "
+    SignPlace: "&aSign Created!"
+    SignBreak: "&a"
+    Error:
+      NoPermission: "&cYou don't have permission!"
+  Signs:
+    amount: "&2Amount"
+    average: "&2Average"
   Database:
     MySQL:
       use: false
